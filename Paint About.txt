@@ -1,0 +1,18 @@
+--------------------------------------------------
+Application Name: Paint n' Suffering
+--------------------------------------------------
+Created on: 10/8/21
+--------------------------------------------------
+Version: Beta 6.0.0
+--------------------------------------------------
+Project Description:
+The purpose of Paint n' Suffering is for 
+the user of the program to open an image 
+and modify it by drawing on it and
+eventually doing other things to it as well.
+The point of the program is for the user to
+enjoy the experience and the developer to
+suffer by creating new features. 
+--------------------------------------------------
+Author: Christian Garcia
+--------------------------------------------------

@@ -1,0 +1,164 @@
+------------------------------------------------
+	Paint n' Suffering Release Beta 6.o.o
+------------------------------------------------
+                      10/18/21
+------------------------------------------------
+              ~~ New Features ~~
+-Added toolbar to display active tool
+and autosave timer
+-added rotate for canvas
+                     ~~ Bugs ~~
+-cannot edit previous tabs
+-autosave image goes black after
+saving a second time
+	  ~~ Upcoming/Hopeful Features ~~
+-Cleaning up bugs
+
+------------------------------------------------
+	Paint n' Suffering Release Beta 5.o.o
+------------------------------------------------
+                      10/8/21
+------------------------------------------------
+              ~~ New Features ~~
+-Replaced text buttons with icons
+-Added tooltips to all buttons
+and textfields in the art toolbar
+-Autosave timer and timer select
+box
+-Fill can be enabled or disabled
+for shape tools
+                     ~~ Bugs ~~
+-new tabs do not allow for editing on 
+canvas
+-autosave image goes black after
+saving a second time
+	  ~~ Upcoming/Hopeful Features ~~
+-logging
+------------------------------------------------
+	Paint n' Suffering Release Beta 4.o.o
+------------------------------------------------
+                      10/1/21
+------------------------------------------------
+              ~~ New Features ~~
+-Remodeled art toolbar:
+ -width slider replaced with combo box
+ -new tools:
+  -random color
+  -eraser
+  -swap fill/outline
+  -combo box for polygon sides
+-new menu bar item edit containing:
+ -Undo
+ -Redo
+ -Select and move
+-added ctrl+key for each menu item.
+-live draw added for all drawing
+and shape tools
+-new shape tools:
+ -Polygon tool
+ -Round Rectangle tool
+
+                     ~~ Bugs ~~
+-new tabs do not allow for editing on 
+canvas
+-select and move works inconsistently
+
+          ~~ Upcoming/Hopeful Features ~~
+-more paint tools
+-fix select and move
+-transparency
+------------------------------------------------
+	Paint n' Suffering Release Beta 3.o.o
+------------------------------------------------
+                      9/24/21
+------------------------------------------------
+              ~~ New Features ~~
+-asks the user if they want to save when
+exiting if changes are made
+-text tool with font that can increase and 
+change color
+-drawing shapes: included shapes are 
+square,rectangle, ellipse, and circle with
+a fill and outline color
+-color grabber to get the color on the
+canvas and sets it to your fill and 
+outline color
+-added zoom in and out feature under
+new menubar tab view
+-added keyboard ui controls for all file
+menu buttons, help menu buttons, and 
+zoom in/out
+-added blank canvas on startup
+
+                     ~~ Bugs ~~
+-new tabs do not allow for editing on 
+canvas
+
+          ~~ Upcoming/Hopeful Features ~~
+-more paint tools
+-undo last items drawn
+-transparency
+
+
+       Paint n' Suffering Release Beta 2.o.o
+------------------------------------------------
+                      9/17/21
+------------------------------------------------
+              ~~ New Features ~~
+-can open images of type png, jpg, jpeg, 
+bmp, and gif
+-save and save as work properly and save 
+all above file types
+-way to exit the program nicely and save
+-Help button with functional options for 
+help,about, and release notes
+-help displays how to access features and 
+briefly describes what they do
+-about displays the info about the program
+-release notes are displayed properly
+-scroll bars activate on canvas if the image
+is too large to fit in the window
+-canvas scales to the size of the image
+-color picker is in art toolbar and works
+-pencil tool and line tool can be accessed
+and disabled
+-slider to change the width of a line used 
+by the pencil tool and line tool
+
+                     ~~ Bugs ~~
+-opening multiple images stacks on top of 
+each other
+
+          ~~ Upcoming/Hopeful Features ~~
+-center canvas
+-add start image to canvas
+-add more art tools
+-add way to work on multiple images (tabs)
+-add way to tell user what width the line is
+-add way for user to type in deisred line
+width
+
+------------------------------------------------
+       Paint n' Suffering Release Beta 1.o.o
+------------------------------------------------
+                      9/10/21
+------------------------------------------------
+              ~~ Current Features ~~
+- Main Toolbar in window
+- Way to nicely exit the program
+- Can open picture files
+- Photo properly displays in the window
+
+                 ~~ Bugs ~~
+- None to be found at the moment
+
+       ~~ Upcoming/Hopeful Features ~~
+- Center picture after it is opened
+- add canvas
+- add color changing feature
+- expand on toolbar possibly
+- add save feature
+- add image instead of having a blank
+window on startup
+-add release note access to toolbar
+------------------------------------------------

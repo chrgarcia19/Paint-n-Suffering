@@ -1,0 +1,206 @@
+--------------------------------------------------
+ 		              File
+--------------------------------------------------
+Open (ctrl+o): Click on file, then click on 
+open.A dialog for your files opens up and 
+allows the user to choose a file. Select the 
+correct type by clicking on the bar next
+to the file name field. 
+
+Save (ctrl+s): Click on file, then click on 
+save.The image is saved with your current
+progress and returns the user to their
+workspace. 
+
+Save As (ctrl+d): Click on file, then
+click on save.A dialog appears on the screen
+and allows you to save the file as any type
+and name it whatever you desire.
+
+Exit (ctrl+e): Click on file, then click on 
+exit. A window appears asking if you want to 
+exit or return to the program. If you exit
+the program, your data will not be saved.
+
+Exit and Save (ctrl+w): Click on file, then
+click on exit and save. A window appears 
+asking if you want to exit and save or
+return to the program. This option saves 
+your image to the existing file. 
+
+Autosave: The canvas is saved to a
+temporary file every x amount of time.
+
+Autosave Checkbox: If checked, the
+countdown to autosave is displayed.
+
+Autosave Times: The timer is set 
+based on this input. It starts at 
+30 seconds and can be toggled up
+to 1800 seconds(15 minutes). 
+--------------------------------------------------
+			       Edit
+--------------------------------------------------
+Undo (ctrl+z): Click on edit, then click 
+undo. This will allow you to undo 
+recent edits made to your image or canvas.
+
+Redo (ctrl+y): Click on edit, then click
+redo. This will allow you to redo edits
+that may have been undone.
+
+Select and Cut (ctrl+c): Click on
+edit, then click select and move. This
+will allow you to select part of an
+image and move it.
+
+Paste (ctrl+v): Click on edit, then click
+on paste. This will allow you to move a
+copied part of the image anywhere with
+the click of a mouse.
+--------------------------------------------------
+			       View
+--------------------------------------------------
+Zoom In (ctrl+]): Click on view, then click
+zoom in. This allows you to zoom in on 
+your canvas.
+
+Zoom Out (ctrl+[): Click on view, then click 
+zoom out. This allows you to zoom out on
+your canvas.
+--------------------------------------------------
+		               Help
+--------------------------------------------------
+Help (ctrl+h): Click on help, then click help. 
+This allows the user to read this, all of this
+text, right here on the screen.
+
+About (ctrl+a): Click on help, then click 
+about. This displays a window to the user
+giving them the name of the project, the
+project version, and the project description.
+
+Release Notes (ctrl+r): Click on help, then 
+click release notes. This displays a window
+with all release notes up to the current
+version.
+--------------------------------------------------
+		          Art Toolbar
+--------------------------------------------------
+Outline Color: Click on the arrow next to the
+button with the word outline to its right.
+This allows the user to select any color
+they want to use which is applied to the 
+line tool, pencil tool, and outlines of
+the shapes.
+
+Fill Color: Click on the arrow next to the
+button with the word fill to its right.
+This allows the user to select any color
+they want to use which is applied to the 
+inside of the shapes.
+
+Random Color: Click on the button
+that says random color. This will
+select a random fill and outline
+color once the button is clicked.
+
+Grabber/Dropper: Select the drop down
+menu that says Grabber/Dropper. Select
+color grabber to enable the tool. Click
+anywhere on the canvas to get the color
+of the selected point which will
+replace your color outline and fill.
+
+Swap Fill/Outline: Select the 
+button that says swap fill/outline.
+This swaps the fill color and the
+outline color with the click
+of a button.
+
+Eraser: Select the button that says
+eraser. Then you can erase whatever
+part of the image or shapes that 
+you wish.
+
+ ~~Shape Tools~~
+Square Tool: Click the button that says
+shape tools. Then click the item square
+tool. This allows the user to add
+a square to their masterpiece.
+
+Rectangle Tool: Click the button that
+says shape tools. Click the item
+rectangle tool. This allows the user
+to add a rectangle to their
+masterpiece.
+
+Round Rectangle Tool: Click the button
+that says shape tools. Click the item
+round rectangle tool. This allows
+the user to add a round rectangle to
+their masterpiece.
+
+Ellispe Tool: Click the button that
+says shape tools. Click the item
+ellipse tool. This allows the user
+to add an ellispe to their masterpiece.
+
+Circle Tool: Click the button that says
+shape tools. Click the item circle
+tool. This allows the user to add a
+circle to their masterpiece.
+
+Polygon Tool: Click the button
+that says shape tools. Then click on
+the item polygon tool. This allows 
+the user to add a polygon to 
+their masterpiece.
+
+~~Drawing Tools~~
+
+Line Tool: Click the arrow next to the text
+Line Tool. This displays two options: enable
+and disable. If you click enable, the line
+tool will work on the canvas.
+
+Pencil Tool: Click the arrow next to the
+text Pencil Tool. This displays two
+options: enable and disable. If you click
+enable, the pencil tool will work on the
+canvas.
+
+~~
+
+Text Tool: Click on the textfield that
+says type here and type in whatever you
+want to display on your masterpiece.
+Then, click the button labeled text tool
+to enable it. CLick anywhere on the
+canvas to add your text to your
+masterpiece.
+
+Width Box: Click on the arrow next
+to the text box with default value
+1. This gives you some widths to 
+choose. If you are not pleased
+with your options, type in
+the text box what integer you 
+want the width of your line. This 
+changes the width of your line, 
+outline for a shape, and size of 
+your font. 
+
+Polygon Sides Box: Click on the 
+arrow next to the text box with
+default value 3. This gives you
+an amount of sides to work with.
+If you are not pleased with your
+options, feel free to type an
+integer into the text box. This
+changes the amount of sides on
+the polygon drawn. The higher
+amount in the text box means
+the more it looks like a circle.
+
+--------------------------------------------------
