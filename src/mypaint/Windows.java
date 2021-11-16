@@ -137,7 +137,7 @@ public class Windows {
         });
         button2.setOnAction(b2 -> {
             if (type == "Exit"){
-                MainLayout.normalSave(CanvasTabs.getCanvas().getCanvas());
+                MainLayout.normalSave(CanvasTabs.getCanvas());
                 window.close();
                 MyPaint.getStage().close();
             }

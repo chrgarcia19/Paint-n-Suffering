@@ -17,8 +17,7 @@ public class CanvasTabs extends Tab{
     private static NextCanvas nextCanvas;
     private static Boolean changesMade;
     private static Pane canvasPane;
-    private static ScrollPane canvasScroll;
-    private static ArrayList<ScrollPane> storeCanvas;
+    private ScrollPane canvasScroll;
     
     public CanvasTabs(){
         super();
@@ -35,14 +34,14 @@ public class CanvasTabs extends Tab{
         super();
         changesMade = false;
         file = p;
-        tabName = p.getName();
+        tabName = file.getName();
         this.setText(tabName);
         nextCanvas = new NextCanvas();
         tabSetup();
     }
     
     private void tabSetup(){
-        this.canvasPane = new Pane(nextCanvas.getCanvas());
+        this.canvasPane = new Pane(nextCanvas);
         this.canvasScroll = new ScrollPane(canvasPane);
         this.setContent(canvasScroll);
         
@@ -58,6 +57,7 @@ public class CanvasTabs extends Tab{
     
     
     
+    public static Pane getPane(){return canvasPane;}
     public static Boolean getChanges(){return changesMade;}
     public static void setChanges(Boolean cm){changesMade = cm;}
     public static NextCanvas getCanvas(){return nextCanvas;}
