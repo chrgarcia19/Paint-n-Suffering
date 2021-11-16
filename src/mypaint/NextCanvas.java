@@ -25,7 +25,7 @@ public class NextCanvas extends DrawCanvas{
     
     public NextCanvas(){
         super();
-        canvas = new Canvas(800, 750);
+        canvas = new Canvas(800, 750);  //You shouldn't be creating a Canvas object here; this class IS the canvas. You should be creating NextCanvas objects that act as the new canvas
         canvasPane = new Pane();
         canvasScroll = new ScrollPane();
         canvasScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
