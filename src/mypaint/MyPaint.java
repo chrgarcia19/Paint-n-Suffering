@@ -23,7 +23,7 @@ public class MyPaint extends Application {
     private static BorderPane window;
     private static Stage mainStage;
     final private String name = "Paint n' Suffering";
-    final private String version = "Beta 6.0.0";
+    final private String version = "V. 1.0.0";
     
     @Override
     public void start(Stage primaryStage) {

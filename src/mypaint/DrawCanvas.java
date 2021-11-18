@@ -9,13 +9,14 @@ import javafx.scene.paint.*;
 
 
 public class DrawCanvas extends Canvas{
-  
+    private static GraphicsContext gc;
     private static double w, h;
     private static Image nextSelect, select;
     private static BufferedImage mainImage, subImage;
     
     public DrawCanvas(){
         super();
+        this.gc = this.getGraphicsContext2D();
     }
     
     /**This method takes the mouse points
@@ -28,27 +29,27 @@ public class DrawCanvas extends Canvas{
     public static void drawSquare(double x1, double y1, double x2, double y2){
         if(ArtTools.getFill().isSelected()){
             if (x2 >= x1 && y2 >= y1){//drawing diagonally down right
-                NextCanvas.getGC().strokeRect(x1, y1, (x2 - x1), (x2 - x1));
-                NextCanvas.getGC().fillRect(x1, y1, (x2 - x1), (x2 - x1));
+                gc.strokeRect(x1, y1, (x2 - x1), (x2 - x1));
+                gc.fillRect(x1, y1, (x2 - x1), (x2 - x1));
             }else if (x2 >= x1 && y1 >= y2){//drawing diagonally up right
-                NextCanvas.getGC().strokeRect(x1, y2, (x2 - x1), (x2 - x1));
-                NextCanvas.getGC().fillRect(x1, y2, (x2 - x1), (x2 - x1));
+                gc.strokeRect(x1, y2, (x2 - x1), (x2 - x1));
+                gc.fillRect(x1, y2, (x2 - x1), (x2 - x1));
             }else if (x1 >= x2 && y2 >= y1){//drawing diagonally down left
-                NextCanvas.getGC().strokeRect(x2, y1, (x1 - x2), (x1 - x2));
-                NextCanvas.getGC().fillRect(x2, y1, (x1 - x2), (x1 - x2));
+                gc.strokeRect(x2, y1, (x1 - x2), (x1 - x2));
+                gc.fillRect(x2, y1, (x1 - x2), (x1 - x2));
             }else if (x1 >= x2 && y1 >= y2){//drawing diagnally up left
-                NextCanvas.getGC().strokeRect(x2, y2, (x1 - x2), (x1 - x2));
-                NextCanvas.getGC().fillRect(x2, y2, (x1 - x2), (x1 - x2));
+                gc.strokeRect(x2, y2, (x1 - x2), (x1 - x2));
+                gc.fillRect(x2, y2, (x1 - x2), (x1 - x2));
             }
         }else{
            if (x2 >= x1 && y2 >= y1){//drawing diagonally down right
-                NextCanvas.getGC().strokeRect(x1, y1, (x2 - x1), (x2 - x1));
+                gc.strokeRect(x1, y1, (x2 - x1), (x2 - x1));
             }else if (x2 >= x1 && y1 >= y2){//drawing diagonally up right
-                NextCanvas.getGC().strokeRect(x1, y2, (x2 - x1), (x2 - x1));
+                gc.strokeRect(x1, y2, (x2 - x1), (x2 - x1));
             }else if (x1 >= x2 && y2 >= y1){//drawing diagonally down left
-                NextCanvas.getGC().strokeRect(x2, y1, (x1 - x2), (x1 - x2));
+                gc.strokeRect(x2, y1, (x1 - x2), (x1 - x2));
             }else if (x1 >= x2 && y1 >= y2){//drawing diagnally up left
-                NextCanvas.getGC().strokeRect(x2, y2, (x1 - x2), (x1 - x2));
+                gc.strokeRect(x2, y2, (x1 - x2), (x1 - x2));
             } 
         }  
     }
@@ -65,27 +66,27 @@ public class DrawCanvas extends Canvas{
         h = Math.abs(y2 - y1);
         if (ArtTools.getFill().isSelected()){
             if (x2 >= x1 && y2 >= y1){//drawing diagonally down right
-                NextCanvas.getGC().strokeRect(x1, y1, w, h);
-                NextCanvas.getGC().fillRect(x1, y1, w, h);
+                gc.strokeRect(x1, y1, w, h);
+                gc.fillRect(x1, y1, w, h);
             }else if (x2 >= x1 && y1 >= y2){//drawing diagonally up right
-                NextCanvas.getGC().strokeRect(x1, y2, w, h);
-                NextCanvas.getGC().fillRect(x1, y2, w, h);
+                gc.strokeRect(x1, y2, w, h);
+                gc.fillRect(x1, y2, w, h);
             }else if (x1 >= x2 && y2 >= y1){//drawing diagonally down left
-                NextCanvas.getGC().strokeRect(x2, y1, w, h);
-                NextCanvas.getGC().fillRect(x2, y1, w, h);
+                gc.strokeRect(x2, y1, w, h);
+                gc.fillRect(x2, y1, w, h);
             }else if (x1 >= x2 && y1 >= y2){//drawing diagnally up left
-                NextCanvas.getGC().strokeRect(x2, y2, w, h);
-                NextCanvas.getGC().fillRect(x2, y2, w, h);
+                gc.strokeRect(x2, y2, w, h);
+                gc.fillRect(x2, y2, w, h);
             }
         }else{
             if (x2 >= x1 && y2 >= y1){//drawing diagonally down right
-                NextCanvas.getGC().strokeRect(x1, y1, w, h);
+                gc.strokeRect(x1, y1, w, h);
             }else if (x2 >= x1 && y1 >= y2){//drawing diagonally up right
-                NextCanvas.getGC().strokeRect(x1, y2, w, h);
+                gc.strokeRect(x1, y2, w, h);
             }else if (x1 >= x2 && y2 >= y1){//drawing diagonally down left
-                NextCanvas.getGC().strokeRect(x2, y1, w, h);
+                gc.strokeRect(x2, y1, w, h);
             }else if (x1 >= x2 && y1 >= y2){//drawing diagnally up left
-                NextCanvas.getGC().strokeRect(x2, y2, w, h);
+                gc.strokeRect(x2, y2, w, h);
             }
         }       
     }
@@ -102,27 +103,27 @@ public class DrawCanvas extends Canvas{
         h = Math.abs(y2 - y1);
         if (ArtTools.getFill().isSelected()){
             if (x2 >= x1 && y2 >= y1){//drawing diagonally down right
-                NextCanvas.getGC().strokeRoundRect(x1, y1, w, h, 25, 25);
-                NextCanvas.getGC().fillRoundRect(x1, y1, w, h, 25, 25);
+                gc.strokeRoundRect(x1, y1, w, h, 25, 25);
+                gc.fillRoundRect(x1, y1, w, h, 25, 25);
             }else if (x2 >= x1 && y1 >= y2){//drawing diagonally up right
-                NextCanvas.getGC().strokeRoundRect(x1, y2, w, h, 25, 25);
-                NextCanvas.getGC().fillRoundRect(x1, y2, w, h, 25, 25);
+                gc.strokeRoundRect(x1, y2, w, h, 25, 25);
+                gc.fillRoundRect(x1, y2, w, h, 25, 25);
             }else if (x1 >= x2 && y2 >= y1){//drawing diagonally down left
-                NextCanvas.getGC().strokeRoundRect(x2, y1, w, h, 25, 25);
-                NextCanvas.getGC().fillRoundRect(x2, y1, w, h, 25, 25);
+                gc.strokeRoundRect(x2, y1, w, h, 25, 25);
+                gc.fillRoundRect(x2, y1, w, h, 25, 25);
             }else if (x1 >= x2 && y1 >= y2){//drawing diagnally up left
-                NextCanvas.getGC().strokeRoundRect(x2, y2, w, h, 25, 25);
-                NextCanvas.getGC().fillRoundRect(x2, y2, w, h, 25, 25);
+                gc.strokeRoundRect(x2, y2, w, h, 25, 25);
+                gc.fillRoundRect(x2, y2, w, h, 25, 25);
             }
         }else{
             if (x2 >= x1 && y2 >= y1){//drawing diagonally down right
-                NextCanvas.getGC().strokeRoundRect(x1, y1, w, h, 25, 25);
+                gc.strokeRoundRect(x1, y1, w, h, 25, 25);
             }else if (x2 >= x1 && y1 >= y2){//drawing diagonally up right
-                NextCanvas.getGC().strokeRoundRect(x1, y2, w, h, 25, 25);
+                gc.strokeRoundRect(x1, y2, w, h, 25, 25);
             }else if (x1 >= x2 && y2 >= y1){//drawing diagonally down left
-                NextCanvas.getGC().strokeRoundRect(x2, y1, w, h, 25, 25);
+                gc.strokeRoundRect(x2, y1, w, h, 25, 25);
             }else if (x1 >= x2 && y1 >= y2){//drawing diagnally up left
-                NextCanvas.getGC().strokeRoundRect(x2, y2, w, h, 25, 25);
+                gc.strokeRoundRect(x2, y2, w, h, 25, 25);
             }
         }       
     }
@@ -137,27 +138,27 @@ public class DrawCanvas extends Canvas{
     public static void drawEllipse(double x1, double y1, double x2, double y2){
         if (ArtTools.getFill().isSelected()){
             if (x2 >= x1 && y2 >= y1){//drawing diagonally down right
-                NextCanvas.getGC().strokeOval(x1, y1, (x2 - x1), (y2 - y1));
-                NextCanvas.getGC().fillOval(x1, y1, (x2 - x1), (y2 - y1));
+                gc.strokeOval(x1, y1, (x2 - x1), (y2 - y1));
+                gc.fillOval(x1, y1, (x2 - x1), (y2 - y1));
             }else if (x2 >= x1 && y1 >= y2){//drawing diagnally up right
-                NextCanvas.getGC().strokeOval(x1, y2, (x2 - x1), (y1 - y2));
-                NextCanvas.getGC().fillOval(x1, y2, (x2 - x1), (y1 - y2));
+                gc.strokeOval(x1, y2, (x2 - x1), (y1 - y2));
+                gc.fillOval(x1, y2, (x2 - x1), (y1 - y2));
             }else if (x1 >= x2 && y2 >= y1){//drawing diagonally down left
-                NextCanvas.getGC().strokeOval(x2, y1, (x1 - x2), (y2 - y1));
-                NextCanvas.getGC().fillOval(x2, y1, (x1 - x2), (y2 - y1));
+                gc.strokeOval(x2, y1, (x1 - x2), (y2 - y1));
+                gc.fillOval(x2, y1, (x1 - x2), (y2 - y1));
             }else if(x1 >= x2 && y1 >= y2){//drawing diagonally up left
-                NextCanvas.getGC().strokeOval(x2, y2, (x1 - x2), (y1 - y2));
-                NextCanvas.getGC().fillOval(x2, y2, (x1 - x2), (y1 - y2));
+                gc.strokeOval(x2, y2, (x1 - x2), (y1 - y2));
+                gc.fillOval(x2, y2, (x1 - x2), (y1 - y2));
             } 
         }else{
             if (x2 >= x1 && y2 >= y1){//drawing diagonally down right
-                NextCanvas.getGC().strokeOval(x1, y1, (x2 - x1), (y2 - y1));
+                gc.strokeOval(x1, y1, (x2 - x1), (y2 - y1));
             }else if (x2 >= x1 && y1 >= y2){//drawing diagnally up right
-                NextCanvas.getGC().strokeOval(x1, y2, (x2 - x1), (y1 - y2));
+                gc.strokeOval(x1, y2, (x2 - x1), (y1 - y2));
             }else if (x1 >= x2 && y2 >= y1){//drawing diagonally down left
-                NextCanvas.getGC().strokeOval(x2, y1, (x1 - x2), (y2 - y1));
+                gc.strokeOval(x2, y1, (x1 - x2), (y2 - y1));
             }else if(x1 >= x2 && y1 >= y2){//drawing diagonally up left
-                NextCanvas.getGC().strokeOval(x2, y2, (x1 - x2), (y1 - y2));
+                gc.strokeOval(x2, y2, (x1 - x2), (y1 - y2));
             } 
         }
     }
@@ -172,27 +173,27 @@ public class DrawCanvas extends Canvas{
     public static void drawCircle(double x1, double y1, double x2, double y2){
         if (ArtTools.getFill().isSelected()){
             if (x2 >= x1 && y2 >= y1){//drawing diagonally down right
-                NextCanvas.getGC().strokeOval(x1, y1, (x2 - x1), (x2 - x1));
-                NextCanvas.getGC().fillOval(x1, y1, (x2 - x1), (x2 - x1));
+                gc.strokeOval(x1, y1, (x2 - x1), (x2 - x1));
+                gc.fillOval(x1, y1, (x2 - x1), (x2 - x1));
             }else if (x2 >= x1 && y1 >= y2){//drawing diagnally up right
-                NextCanvas.getGC().strokeOval(x1, y2, (x2 - x1), (x2 - x1));
-                NextCanvas.getGC().fillOval(x1, y2, (x2 - x1), (x2 - x1));
+                gc.strokeOval(x1, y2, (x2 - x1), (x2 - x1));
+                gc.fillOval(x1, y2, (x2 - x1), (x2 - x1));
             }else if (x1 >= x2 && y2 >= y1){//drawing diagonally down left
-                NextCanvas.getGC().strokeOval(x2, y1, (x1 - x2), (x1 - x2));
-                NextCanvas.getGC().fillOval(x2, y1, (x1 - x2), (x1 - x2));
+                gc.strokeOval(x2, y1, (x1 - x2), (x1 - x2));
+                gc.fillOval(x2, y1, (x1 - x2), (x1 - x2));
             }else if(x1 >= x2 && y1 >= y2){//drawing diagonally up left
-                NextCanvas.getGC().strokeOval(x2, y2, (x1 - x2), (x1 - x2));
-                NextCanvas.getGC().fillOval(x2, y2, (x1 - x2), (x1 - x2));
+                gc.strokeOval(x2, y2, (x1 - x2), (x1 - x2));
+                gc.fillOval(x2, y2, (x1 - x2), (x1 - x2));
             } 
         }else{
             if (x2 >= x1 && y2 >= y1){//drawing diagonally down right
-                NextCanvas.getGC().strokeOval(x1, y1, (x2 - x1), (x2 - x1));
+                gc.strokeOval(x1, y1, (x2 - x1), (x2 - x1));
             }else if (x2 >= x1 && y1 >= y2){//drawing diagnally up right
-                NextCanvas.getGC().strokeOval(x1, y2, (x2 - x1), (x2 - x1));
+                gc.strokeOval(x1, y2, (x2 - x1), (x2 - x1));
             }else if (x1 >= x2 && y2 >= y1){//drawing diagonally down left
-                NextCanvas.getGC().strokeOval(x2, y1, (x1 - x2), (x1 - x2));
+                gc.strokeOval(x2, y1, (x1 - x2), (x1 - x2));
             }else if(x1 >= x2 && y1 >= y2){//drawing diagonally up left
-                NextCanvas.getGC().strokeOval(x2, y2, (x1 - x2), (x1 - x2));
+                gc.strokeOval(x2, y2, (x1 - x2), (x1 - x2));
             } 
         }
     }
@@ -217,10 +218,10 @@ public class DrawCanvas extends Canvas{
             yPoints[i] = y1 + (r * Math.sin((2*Math.PI*i)/Integer.parseInt(ArtTools.getPolySides().getEditor().getText())));
         }
         if (ArtTools.getFill().isSelected()){
-            NextCanvas.getGC().strokePolygon(xPoints, yPoints, Integer.parseInt(ArtTools.getPolySides().getEditor().getText()));
-            NextCanvas.getGC().fillPolygon(xPoints, yPoints, Integer.parseInt(ArtTools.getPolySides().getEditor().getText()));
+            gc.strokePolygon(xPoints, yPoints, Integer.parseInt(ArtTools.getPolySides().getEditor().getText()));
+            gc.fillPolygon(xPoints, yPoints, Integer.parseInt(ArtTools.getPolySides().getEditor().getText()));
         }else{
-            NextCanvas.getGC().strokePolygon(xPoints, yPoints, Integer.parseInt(ArtTools.getPolySides().getEditor().getText()));
+            gc.strokePolygon(xPoints, yPoints, Integer.parseInt(ArtTools.getPolySides().getEditor().getText()));
         }
     }
     
@@ -231,37 +232,37 @@ public class DrawCanvas extends Canvas{
      * @param x2, x value on second click
      * @param y2, y value on second click
      */
-    public static void drawCut(double x1, double y1, double x2, double y2){
-        NextCanvas.getGC().setFill(Color.WHITE);
-        NextCanvas.getGC().setStroke(Color.WHITE);
+    public void drawCut(double x1, double y1, double x2, double y2){
+        gc.setFill(Color.WHITE);
+        gc.setStroke(Color.WHITE);
         w = Math.abs(x2 - x1);
         h = Math.abs(y2 - y1);
-        select = NextCanvas.getCanvas().snapshot(null, null);
+        select = this.snapshot(null, null);
         mainImage = SwingFXUtils.fromFXImage(select, null);
         subImage = new BufferedImage((int) w, (int) h, BufferedImage.OPAQUE);
         if (x2 >= x1 && y2 >= y1){//drawing diagonally down right
-            select = NextCanvas.getCanvas().snapshot(null, null);
+            select = this.snapshot(null, null);
             subImage.createGraphics().drawImage(mainImage.getSubimage((int) x1, (int) y1, (int) w, (int) h),0, 0, null);
             nextSelect = SwingFXUtils.toFXImage(subImage, null);
-            NextCanvas.getGC().fillRect(x1, y1, w, h);
-            NextCanvas.getGC().strokeRect(x1, y1, w, h);
+            gc.fillRect(x1, y1, w, h);
+            gc.strokeRect(x1, y1, w, h);
         }else if (x2 >= x1 && y1 >= y2){//drawing diagnally up right
-            select = NextCanvas.getCanvas().snapshot(null, null);
+            select = this.snapshot(null, null);
             subImage.createGraphics().drawImage(mainImage.getSubimage((int) x1, (int) y2, (int) w, (int) h),0, 0, null);
             nextSelect = SwingFXUtils.toFXImage(subImage, null);
-            NextCanvas.getGC().fillRect(x1, y2, w, h);
-            NextCanvas.getGC().strokeRect(x1, y2, w, h);
+            gc.fillRect(x1, y2, w, h);
+            gc.strokeRect(x1, y2, w, h);
         }else if(x1 >= x2 && y2 >= y1){//drawing diagonally up left
-            select = NextCanvas.getCanvas().snapshot(null, null);
+            select = this.snapshot(null, null);
             subImage.createGraphics().drawImage(mainImage.getSubimage((int) x2, (int) y1, (int) w, (int) h),0, 0, null);
             nextSelect = SwingFXUtils.toFXImage(subImage, null);
-            NextCanvas.getGC().fillRect(x2, y1, w, h);
-            NextCanvas.getGC().strokeRect(x2, y1, w, h);
+            gc.fillRect(x2, y1, w, h);
+            gc.strokeRect(x2, y1, w, h);
         }else if(x1 >= x2 && y1 >= y2){//drawing diagonally up left
             subImage.createGraphics().drawImage(mainImage.getSubimage((int) x2, (int) y2, (int) w, (int) h),0, 0, null);
             nextSelect = SwingFXUtils.toFXImage(subImage, null);
-            NextCanvas.getGC().fillRect(x2, y2, w, h);
-            NextCanvas.getGC().strokeRect(x2, y2, w, h);
+            gc.fillRect(x2, y2, w, h);
+            gc.strokeRect(x2, y2, w, h);
         }
     }
     
@@ -272,22 +273,22 @@ public class DrawCanvas extends Canvas{
      * @param x2, x value on second click
      * @param y2, y value on second click
      */
-    public static void drawCopy(double x1, double y1, double x2, double y2){
+    public void drawCopy(double x1, double y1, double x2, double y2){
         w = Math.abs(x2 - x1);
         h = Math.abs(y2 - y1);
-        select = NextCanvas.getCanvas().snapshot(null, null);
+        select = this.snapshot(null, null);
         mainImage = SwingFXUtils.fromFXImage(select, null);
         subImage = new BufferedImage((int) w, (int) h, BufferedImage.OPAQUE);
         if (x2 >= x1 && y2 >= y1){//drawing diagonally down right
-            select = NextCanvas.getCanvas().snapshot(null, null);
+            select = this.snapshot(null, null);
             subImage.createGraphics().drawImage(mainImage.getSubimage((int) x1, (int) y1, (int) w, (int) h),0, 0, null);
             nextSelect = SwingFXUtils.toFXImage(subImage, null);
         }else if (x2 >= x1 && y1 >= y2){//drawing diagnally up right
-            select = NextCanvas.getCanvas().snapshot(null, null);
+            select = this.snapshot(null, null);
             subImage.createGraphics().drawImage(mainImage.getSubimage((int) x1, (int) y2, (int) w, (int) h),0, 0, null);
             nextSelect = SwingFXUtils.toFXImage(subImage, null);
         }else if(x1 >= x2 && y2 >= y1){//drawing diagonally up left
-            select = NextCanvas.getCanvas().snapshot(null, null);
+            select = this.snapshot(null, null);
             subImage.createGraphics().drawImage(mainImage.getSubimage((int) x2, (int) y1, (int) w, (int) h),0, 0, null);
             nextSelect = SwingFXUtils.toFXImage(subImage, null);
         }else if(x1 >= x2 && y1 >= y2){//drawing diagonally up left
@@ -304,21 +305,22 @@ public class DrawCanvas extends Canvas{
      * @param y2, y value on second click
      */
     public static void drawSelection(double x1, double y1, double x2, double y2){
-        NextCanvas.getGC().setStroke(Color.BLACK);
-        NextCanvas.getGC().setLineDashes(new double[] {25d, 10d, 25d, 10d});
+        gc.setStroke(Color.BLACK);
+        gc.setLineDashes(new double[] {25d, 10d, 25d, 10d});
         w = Math.abs(x2 - x1);
         h = Math.abs(y2 - y1);
         if (x2 >= x1 && y2 >= y1){//drawing diagonally down right
-            NextCanvas.getGC().strokeRect(x1, y1, w, h);
+            gc.strokeRect(x1, y1, w, h);
         }else if (x2 >= x1 && y1 >= y2){//drawing diagonally up right
-            NextCanvas.getGC().strokeRect(x1, y2, w, h);
+            gc.strokeRect(x1, y2, w, h);
         }else if (x1 >= x2 && y2 >= y1){//drawing diagonally down left
-            NextCanvas.getGC().strokeRect(x2, y1, w, h);
+            gc.strokeRect(x2, y1, w, h);
         }else if (x1 >= x2 && y1 >= y2){//drawing diagnally up left
-            NextCanvas.getGC().strokeRect(x2, y2, w, h);
+            gc.strokeRect(x2, y2, w, h);
         }      
-        NextCanvas.getGC().setLineDashes(null);
+        gc.setLineDashes(null);
     }
     
+    public static GraphicsContext getGC(){return gc;}
     public static Image getImage(){return nextSelect;}
 }

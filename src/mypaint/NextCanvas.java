@@ -14,17 +14,14 @@ import javafx.scene.transform.*;
 
 
 public class NextCanvas extends DrawCanvas{
-    private static Canvas canvas;
-    private static GraphicsContext gc;
     private static Scale scale;
     private static double zoom, x1, y1, x2, y2;
     private static Stack<Image> undo, redo;
     private static Image show;
-    private static Pane canvasPane;
-    private static ScrollPane canvasScroll;
     
     public NextCanvas(){
         super();
+
         canvas = new Canvas(800, 750);  //You shouldn't be creating a Canvas object here; this class IS the canvas. You should be creating NextCanvas objects that act as the new canvas
         canvasPane = new Pane();
         canvasScroll = new ScrollPane();
@@ -32,110 +29,112 @@ public class NextCanvas extends DrawCanvas{
         canvasScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         gc = canvas.getGraphicsContext2D();
         scale = new Scale(canvas.getWidth(), canvas.getHeight());
+        scale = new Scale(this.getWidth(), this.getHeight());
         zoom = 1;
         undo = new Stack<Image>();
         redo = new Stack<Image>();
         undo.push(MainLayout.getImage());
-        
-        
-        this.gc.setFill(Color.WHITE);
-        this.gc.setStroke(Color.WHITE);
+        this.setWidth(800);
+        this.setHeight(750);
+       
+        this.getGC().setFill(Color.WHITE);
+        this.getGC().setStroke(Color.WHITE);
         ArtTools.getFill().setSelected(true);
-        this.gc.strokeRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        this.gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        this.getGC().strokeRect(0, 0, this.getWidth(), this.getHeight());
+        this.getGC().fillRect(0, 0, this.getWidth(), this.getHeight());
         ArtTools.getFill().setSelected(false);
         
-        this.canvas.setOnMousePressed((MouseEvent cmp) -> {
-            initDraw(this.gc, ArtTools.getOutlineWidth(), ArtTools.getCap(), ArtTools.getDash(), 
+        this.setOnMousePressed((MouseEvent cmp) -> {
+            initDraw(this.getGC(), ArtTools.getOutlineWidth(), ArtTools.getCap(), ArtTools.getDash(), 
                     ArtTools.getOutline(), ArtTools.getFillColor());
             //updates first coordinates
             x1 = cmp.getX();
             y1 = cmp.getY();
             if (ArtTools.getLine().isSelected()){//line tool
-                addUndo(undo, this.canvas);
+                addUndo(undo, this);
             }else if (ArtTools.getPencil().isSelected()){//pencil tool
-                this.gc.beginPath();
+                this.getGC().beginPath();
                 //tracks initial x and y
-                this.gc.moveTo(cmp.getX(), cmp.getY());
-                this.gc.stroke();
-                addUndo(undo, this.canvas);
+                this.getGC().moveTo(cmp.getX(), cmp.getY());
+                this.getGC().stroke();
+                addUndo(undo, this);
             }else if(ArtTools.getSquare().isSelected()){//square tool
-                addUndo(undo, this.canvas);
+                addUndo(undo, this);
             }else if(ArtTools.getRectangle().isSelected()){//rectangle tool
-                addUndo(undo, this.canvas);
+                addUndo(undo, this);
             }else if (ArtTools.getRoundRectangle().isSelected()){//round rectangle tool
-                addUndo(undo, this.canvas);
+                addUndo(undo, this);
             }else if(ArtTools.getEllipse().isSelected()){//ellipse tool
-                addUndo(undo, this.canvas);
+                addUndo(undo, this);
             }else if(ArtTools.getCircle().isSelected()){//circle tool
-                addUndo(undo, this.canvas);
+                addUndo(undo, this);
             }else if(ArtTools.getPolygon().isSelected()){//polygon tool
-                addUndo(undo, this.canvas);
+                addUndo(undo, this);
             }else if(ArtTools.getEraser().isSelected()){//eraser tool
-                this.gc.beginPath();
+                this.getGC().beginPath();
                 //tracks initial x and y
-                this.gc.moveTo(cmp.getX(), cmp.getY());
-                this.gc.stroke();
-                addUndo(undo, this.canvas);
+                this.getGC().moveTo(cmp.getX(), cmp.getY());
+                this.getGC().stroke();
+                addUndo(undo, this);
             }else if(MainLayout.getSelect().isSelected()){//select
-                addUndo(undo, this.canvas);
+                addUndo(undo, this);
             }
         });    
-        this.canvas.setOnMouseDragged((MouseEvent cmd) -> {
+        this.setOnMouseDragged((MouseEvent cmd) -> {
             //gets end points
             x2 = cmd.getX();
             y2 = cmd.getY();
             if (ArtTools.getLine().isSelected()){//line tool
                 Image show = (Image) undo.peek();
-                this.gc.drawImage(show, 0, 0);
+                this.getGC().drawImage(show, 0, 0);
                 //makes line using 4 points
-                this.gc.strokeLine(x1, y1, x2, y2);
+                this.getGC().strokeLine(x1, y1, x2, y2);
             }else if (ArtTools.getPencil().isSelected()){//pencil tool
                 //gets end x and y
-                this.gc.lineTo(cmd.getX(), cmd.getY());
-                this.gc.stroke();
+                this.getGC().lineTo(cmd.getX(), cmd.getY());
+                this.getGC().stroke();
             }else if(ArtTools.getSquare().isSelected()){//square tool
                 Image show = (Image) undo.peek();
-                this.gc.drawImage(show, 0, 0);
+                this.getGC().drawImage(show, 0, 0);
                 DrawCanvas.drawSquare(x1, y1, x2, y2);
             }else if(ArtTools.getRectangle().isSelected()){//rectangle tool
                 Image show = (Image) undo.peek();
-                this.gc.drawImage(show, 0, 0);
+                this.getGC().drawImage(show, 0, 0);
                 DrawCanvas.drawRectangle(x1, y1, x2, y2);
             }else if (ArtTools.getRoundRectangle().isSelected()){//round rectangle tool
                 Image show = (Image) undo.peek();
-                this.gc.drawImage(show, 0, 0);
+                this.getGC().drawImage(show, 0, 0);
                 DrawCanvas.drawRoundRectangle(x1, y1, x2, y2);
             }else if(ArtTools.getEllipse().isSelected()){//ellipse tool
                 Image show = (Image) undo.peek();
-                this.gc.drawImage(show, 0, 0);
+                this.getGC().drawImage(show, 0, 0);
                 DrawCanvas.drawEllipse(x1, y1, x2, y2);
             }else if(ArtTools.getCircle().isSelected()){//circle tool
                 Image show = (Image) undo.peek();
-                this.gc.drawImage(show, 0, 0);
+                this.getGC().drawImage(show, 0, 0);
                 DrawCanvas.drawCircle(x1, y1, x2, y2);
             }else if(ArtTools.getPolygon().isSelected()){//polygon tool
                 Image show = (Image) undo.peek();
-                this.gc.drawImage(show, 0, 0);
+                this.getGC().drawImage(show, 0, 0);
                 DrawCanvas.drawPolygon(x1, y1, x2, y2);
             }else if(ArtTools.getEraser().isSelected()){//eraser tool
                 //gets end x and y
-                this.gc.setStroke(Color.WHITE);
-                this.gc.lineTo(cmd.getX(), cmd.getY());
-                this.gc.stroke();
+                this.getGC().setStroke(Color.WHITE);
+                this.getGC().lineTo(cmd.getX(), cmd.getY());
+                this.getGC().stroke();
             }else if(MainLayout.getSelect().isSelected()){//select
                 Image show = (Image) undo.peek();
-                this.gc.drawImage(show, 0, 0);
+                this.getGC().drawImage(show, 0, 0);
                 DrawCanvas.drawSelection(x1, y1, x2, y2);
             }
         });
-        this.canvas.setOnMouseReleased((MouseEvent cmr) -> {
+        this.setOnMouseReleased((MouseEvent cmr) -> {
             //gets end points
             x2 = cmr.getX();
             y2 = cmr.getY();
             if(ArtTools.getLine().isSelected()){//line tool
                 //makes line using 4 points
-                this.gc.strokeLine(x1, y1, x2, y2);
+                this.getGC().strokeLine(x1, y1, x2, y2);
                 CanvasTabs.setChanges(true);
                 redo.clear();
             }else if(ArtTools.getPencil().isSelected()){//pencil tool
@@ -170,7 +169,7 @@ public class NextCanvas extends DrawCanvas{
                 redo.clear();
             }else if(MainLayout.getSelect().isSelected()){//select
                 Image show = (Image) undo.peek();
-                this.gc.drawImage(show, 0, 0);
+                this.getGC().drawImage(show, 0, 0);
                 DrawCanvas.drawSelection(x1, y1, x2, y2);
                 CanvasTabs.setChanges(true);
                 redo.clear();
@@ -178,34 +177,29 @@ public class NextCanvas extends DrawCanvas{
                 MainLayout.getCopy().setDisable(false);
             }
         });
-        this.canvas.setOnMouseClicked((MouseEvent cmc) -> { 
+        this.setOnMouseClicked((MouseEvent cmc) -> { 
             if(ArtTools.getText().isSelected()){//text tool
-                initDraw(this.gc, ArtTools.getFontSize(), ArtTools.getOutline());
-                addUndo(undo, this.canvas);
+                initDraw(this.getGC(), ArtTools.getFontSize(), ArtTools.getOutline());
+                addUndo(undo, this);
                 String input = ArtTools.getType().getText();
-                this.gc.fillText(input, cmc.getX(), cmc.getY());
+                this.getGC().fillText(input, cmc.getX(), cmc.getY());
                 CanvasTabs.setChanges(true);
                 redo.clear();
             }else if(ArtTools.getColorGrabber().isSelected()){//color grabber
-                WritableImage wI = new WritableImage((int) this.canvas.getWidth(),(int) this.canvas.getHeight());
-                this.canvas.snapshot(null, wI);
+                WritableImage wI = new WritableImage((int) this.getWidth(),(int) this.getHeight());
+                this.snapshot(null, wI);
                 PixelReader pr = wI.getPixelReader();
                 ArtTools.getFillColor().setValue(pr.getColor((int) cmc.getX(), (int)cmc.getY()));
                 ArtTools.getOutline().setValue(pr.getColor((int) cmc.getX(), (int)cmc.getY()));
                 CanvasTabs.setChanges(true);
             }else if(MainLayout.getPaste().isSelected()){//paste
-                this.gc.drawImage(DrawCanvas.getImage(), cmc.getX(), cmc.getY());
+                this.getGC().drawImage(DrawCanvas.getImage(), cmc.getX(), cmc.getY());
                 CanvasTabs.setChanges(true);
                 redo.clear();
             }
         });
     }  
     
-    public static Node canvasSetup(){
-        canvasPane.getChildren().add(canvas);
-        canvasScroll.setContent(canvasPane);
-        return canvasScroll;
-    }
     
     /**This method sets the fill, stroke, and width 
      * for each shape and drawing tool
@@ -257,7 +251,7 @@ public class NextCanvas extends DrawCanvas{
     /**This method sets fill, stroke, and width to
      * 0 and makes nothing occur if a mouse action occurs
      * @param gc, graphics context object
-     * @param c, canvas object 
+     * @param c, this object 
      */
     public static void endDraw(GraphicsContext gc, Canvas c){
         //no color for fill or stroke
@@ -266,7 +260,7 @@ public class NextCanvas extends DrawCanvas{
         //sets to 0 so nothing appears
         gc.setLineWidth(0);
         gc.fillText(null, 0, 0);
-        //causes nothing to happen if canvas senses press or release
+        //causes nothing to happen if this senses press or release
         c.setOnMousePressed(cv -> { 
         });
         c.setOnMouseReleased(cr -> {
@@ -277,35 +271,35 @@ public class NextCanvas extends DrawCanvas{
         });
     }
     
-    /**This method zooms in the canvas by a
+    /**This method zooms in the this by a
      * factor of .1 while keeping the scale
      */
     public static void zoomIn(){
-        canvasPane.getTransforms().remove(scale);
+        CanvasTabs.getPane().getTransforms().remove(scale);
         zoom += .1;
         scale = new Scale(zoom, zoom, 0, 0);
-        canvasPane.getTransforms().add(scale);        
+        CanvasTabs.getPane().getTransforms().add(scale);        
     }
     
-    /**This method zooms out the canvas by
+    /**This method zooms out the this by
      * a factor of -.1 while keeping the scale
      */
     public static void zoomOut(){
-        canvasPane.getTransforms().remove(scale);
+        CanvasTabs.getPane().getTransforms().remove(scale);
         zoom -= .1;
         scale = new Scale(zoom, zoom, 0, 0);
-        canvasPane.getTransforms().add(scale);
+        CanvasTabs.getPane().getTransforms().add(scale);
     }
     
     /**This method removes an edit made
-     * on the canvas
+     * on the this
      */
-    public static void undo(){
+    public void undo(){
         if(!undo.empty()){
-            WritableImage store = new WritableImage((int) canvas.getWidth(),(int) canvas.getHeight());
-            canvas.snapshot(null, store);
+            WritableImage store = new WritableImage((int) this.getWidth(),(int) this.getHeight());
+            this.snapshot(null, store);
             Image storedImage = undo.pop();
-            gc.drawImage(storedImage, 0, 0);
+            this.getGC().drawImage(storedImage, 0, 0);
             redo.push(store);
         }
     }
@@ -313,33 +307,30 @@ public class NextCanvas extends DrawCanvas{
     /**This method restores a change that
      * was undone previously
      */
-    public static void redo(){
+    public void redo(){
         if(!redo.empty()){
-            WritableImage store = new WritableImage((int) canvas.getWidth(),(int) canvas.getHeight());
-            canvas.snapshot(null, store);
+            WritableImage store = new WritableImage((int) this.getWidth(),(int) this.getHeight());
+            this.snapshot(null, store);
             Image storedImage = redo.pop();
-            gc.drawImage(storedImage, 0, 0);
+            this.getGC().drawImage(storedImage, 0, 0);
             undo.push(store);
         }
     }
     
-    /**This method adds edits made on canvas
+    /**This method adds edits made on this
      * to the stack
      * @param s, a Stack of images
-     * @param c, a canvas object
+     * @param c, a this object
      */
-    public static void addUndo(Stack<Image> s, Canvas c){
+    public void addUndo(Stack<Image> s, NextCanvas c){
         Image prev = new WritableImage((int) c.getWidth(),(int) c.getHeight());
-        canvas.snapshot(null, (WritableImage) prev);
+        this.snapshot(null, (WritableImage) prev);
         s.push(prev);
         redo.clear();
     }  
     
-    public static Canvas getCanvas(){return canvas;}
-    public static GraphicsContext getGC(){return gc;}
     public static double getX1(){return x1;}
     public static double getY1(){return y1;}
     public static double getX2(){return x2;}
     public static double getY2(){return y2;}
-    public static Pane getPane(){return canvasPane;}
-}
+

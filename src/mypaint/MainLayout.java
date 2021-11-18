@@ -27,10 +27,11 @@ public class MainLayout{
     private static BorderPane window;
     private static ScrollPane workspace;
     private static Label activeTool;
+    private static NextCanvas canvas;
     
     
     
-    public MainLayout(){
+    public MainLayout(){        
         //File Button in Toolbar
         file = new Menu("File");
         create = new MenuItem("New Project");
@@ -114,29 +115,29 @@ public class MainLayout{
         window.setPrefSize(1000, 800);
         
         right90.setOnAction(r90 -> {
-            NextCanvas.getPane().setRotate(NextCanvas.getPane().getRotate() + 90);
+            CanvasTabs.getPane().setRotate(CanvasTabs.getPane().getRotate() + 90);
         });
         
         left90.setOnAction(l90 -> {
-            NextCanvas.getPane().setRotate(NextCanvas.getPane().getRotate() - 90);
+            CanvasTabs.getPane().setRotate(CanvasTabs.getPane().getRotate() - 90);
         });
         
         r180.setOnAction(ro180 -> {
-            NextCanvas.getPane().setRotate(NextCanvas.getPane().getRotate() + 180);
+            CanvasTabs.getPane().setRotate(CanvasTabs.getPane().getRotate() + 180);
         });
         
         flipH.setOnAction(fh -> {
-            NextCanvas.getPane().setScaleX(NextCanvas.getPane().getScaleX() * -1);
+            CanvasTabs.getPane().setScaleX(CanvasTabs.getPane().getScaleX() * -1);
         });
         
         flipV.setOnAction(fv -> {
-            NextCanvas.getPane().setScaleY(NextCanvas.getPane().getScaleY() * -1);
+            CanvasTabs.getPane().setScaleY(CanvasTabs.getPane().getScaleY() * -1);
         });
         
         reset.setOnAction(re -> {
-            NextCanvas.getPane().setRotate(NextCanvas.getPane().getRotate() * 0);
-            NextCanvas.getPane().setScaleX(1);
-            NextCanvas.getPane().setScaleY(1);
+            CanvasTabs.getPane().setRotate(CanvasTabs.getPane().getRotate() * 0);
+            CanvasTabs.getPane().setScaleX(1);
+            CanvasTabs.getPane().setScaleY(1);
         });
         
         timeOptions[0].setOnAction(t0 -> {
@@ -248,16 +249,16 @@ public class MainLayout{
         cut.setAccelerator(KeyCombination.keyCombination("Ctrl+X"));
         cut.setOnAction(sm -> {
             ArtTools.toggleOff();
-            NextCanvas.undo();
-            DrawCanvas.drawCut(NextCanvas.getX1(), NextCanvas.getY1(), NextCanvas.getX2(), NextCanvas.getY2());
+            CanvasTabs.getCanvas().undo();
+            CanvasTabs.getCanvas().drawCut(NextCanvas.getX1(), NextCanvas.getY1(), NextCanvas.getX2(), NextCanvas.getY2());
             paste.setDisable(false);
         });
         
         copy.setAccelerator(KeyCombination.keyCombination("Ctrl+C"));
         copy.setOnAction(sm -> {
             ArtTools.toggleOff();
-            NextCanvas.undo();
-            DrawCanvas.drawCopy(NextCanvas.getX1(), NextCanvas.getY1(), NextCanvas.getX2(), NextCanvas.getY2());
+            CanvasTabs.getCanvas().undo();
+            CanvasTabs.getCanvas().drawCopy(NextCanvas.getX1(), NextCanvas.getY1(), NextCanvas.getX2(), NextCanvas.getY2());
             paste.setDisable(false);
         });
         
@@ -271,12 +272,12 @@ public class MainLayout{
         
         redoB.setAccelerator(KeyCombination.keyCombination("Ctrl+Y"));
         redoB.setOnAction(re -> {
-            NextCanvas.redo();
+            CanvasTabs.getCanvas().redo();
         });
         
         undoB.setAccelerator(KeyCombination.keyCombination("Ctrl+Z")); 
         undoB.setOnAction(un -> {
-            NextCanvas.undo();
+            CanvasTabs.getCanvas().undo();
         });
         
         zoomIn.setAccelerator(KeyCombination.keyCombination("Ctrl+]"));
@@ -321,8 +322,8 @@ public class MainLayout{
             saveFile = selection;
             temp = new CanvasTabs(selection);
             //sets canvas to size of image
-            temp.getCanvas().getCanvas().setWidth(image.getWidth());
-            temp.getCanvas().getCanvas().setHeight(image.getHeight());
+            temp.getCanvas().setWidth(image.getWidth());
+            temp.getCanvas().setHeight(image.getHeight());
             //draws image to canvas
             temp.getCanvas().getGC().drawImage(image, 0, 0);
             MyPaint.getTP().getTabs().add(temp);
@@ -341,9 +342,9 @@ public class MainLayout{
     public static void save(){
         //pulls up save as if no file is present
         if (saveFile == null){
-            initSaveNAs(pickFile, MyPaint.getStage(), CanvasTabs.getCanvas().getCanvas());
+            initSaveNAs(pickFile, MyPaint.getStage(), CanvasTabs.getCanvas());
         }else{//saveFile != false
-            normalSave(CanvasTabs.getCanvas().getCanvas());
+            normalSave(CanvasTabs.getCanvas());
         }
     }
     
@@ -351,7 +352,7 @@ public class MainLayout{
      * to save a new file
      */
     public static void saveAs(){
-        initSaveNAs(pickFile, MyPaint.getStage(), CanvasTabs.getCanvas().getCanvas());
+        initSaveNAs(pickFile, MyPaint.getStage(), CanvasTabs.getCanvas());
     }
     
     /**This method takes a snapshot of the canvas and converts
