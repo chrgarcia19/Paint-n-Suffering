@@ -1,4 +1,24 @@
 ------------------------------------------------
+	Paint n' Suffering Release V 1.0.0
+------------------------------------------------
+                      11/6/21
+------------------------------------------------
+              ~~ New Features ~~
+-Added dash options for drawing
+and shape tools (Not Eraser)
+-Added line cap options for 
+drawing tools.
+-Separated outline width and font 
+so the user is not confused to
+outline width's function.
+
+                     ~~ Bugs ~~
+-cannot edit previous tabs
+
+	  ~~ Upcoming/Hopeful Features ~~
+-Fix current bug
+
+------------------------------------------------
 	Paint n' Suffering Release Beta 6.o.o
 ------------------------------------------------
                       10/18/21
