@@ -13,21 +13,19 @@ import javafx.scene.text.*;
 
 public class ArtTools{
     protected static Logger logger;
-    private static VBox lineWidth, artMenu, colors, tools, polyText, drawBox,
+    private static VBox artMenu, colors, tools, drawBox,
             shapeBox, realTimer, outlineBox;
     private static ToggleButton line, pencil, sqr, rect, ell, cir, rRect, poly,
             cGrab, eraser, text;
     private static HBox fBox, oBox, dTools, sTools, msTools, colorBox, 
             polyBox, widthBox, textTools, fontBox, capBox, dashBox;
     private static ToolBar art, display;
-    private static Label fillLabel, outlineLabel, drawLabel, shapeLabel, 
-            polyLabel, widthLabel, countdown, active, fontLabel, capLabel,
+    private static Label outlineLabel, drawLabel, shapeLabel, 
+            polyLabel, widthLabel, active, fontLabel, capLabel,
             dashLabel;
     private static ColorPicker outline, fill;
-    private static Boolean gSelected, dSelected;
-    private static Color grabbedColor;
     private static Button randomColor, swap;
-    private static TextField type, polyN;
+    private static TextField type;
     private static ComboBox<Integer> width, polySides, fontSize;
     private static ComboBox<Double> dashes;
     private static ChoiceBox<String> lineCap;
@@ -35,8 +33,8 @@ public class ArtTools{
     private static Separator shapeSep, drawSep, split1, split2, split3, split4, split5;
     private static CheckBox fillOn;
     private static Tooltip lineTip, pencilTip, sqrTip, rectTip, rRectTip,
-            ellTip, cirTip, polyTip, textTip, textfTip, widthTip, pSidesTip,
-            eraserTip, rcTip, swapTip, grabTip, outlineTip, fillTip, fSizeTip,
+            ellTip, cirTip, polyTip, textTip, textfTip, widthTip,
+            rcTip, swapTip, grabTip, outlineTip, fillTip, fSizeTip,
             lCapTip, dashTip;
     private static String currentTool;
     final private static File lineIcon = new File("C:\\Users\\chris\\OneDrive\\Documents\\Valpo Semester 1 Stuff\\CS 250\\Labs\\Java\\Paint\\Button Icons\\Line Icon.png");
@@ -155,7 +153,7 @@ public class ArtTools{
         cir.setGraphic(openImage(cirIcon));
         cir.setTooltip(cirTip);
         
-        polyTip = new Tooltip("Tool that draws squares.");
+        polyTip = new Tooltip("Tool that draws a n-sided polygon.");
         polyTip.setTextAlignment(TextAlignment.RIGHT);
         poly = new ToggleButton();
         poly.setGraphic(openImage(polyIcon));

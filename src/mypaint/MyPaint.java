@@ -1,13 +1,9 @@
 package mypaint;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.logging.FileHandler;
-import java.util.logging.SimpleFormatter;
+import java.util.*;
+import java.util.logging.*;
 import javafx.application.*;
 import javafx.scene.*;
 import javafx.stage.*;
@@ -18,8 +14,7 @@ public class MyPaint extends Application {
     private static ArtTools artTools;
     private static NextCanvas canvas;
     private static MainLayout layout;
-    private static CanvasTabs cTabs;
-    private static TabPane tabPane;
+    public static TabPane tabPane;
     private static BorderPane window;
     private static Stage mainStage;
     final private String name = "Paint n' Suffering";
@@ -35,7 +30,6 @@ public class MyPaint extends Application {
         layout = new MainLayout();
         artTools = new ArtTools();
         canvas = new NextCanvas();
-        cTabs = new CanvasTabs();
         
         window = new BorderPane();
         layoutSetup();
@@ -77,6 +71,9 @@ public class MyPaint extends Application {
         window.setBottom(artTools.getDisplay());
     }
     
+    /**This method logs the current
+     * active tool in use. 
+     */
     public static void logPaint(){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
         Date date = new Date(System.currentTimeMillis());
@@ -84,7 +81,7 @@ public class MyPaint extends Application {
         File modifyFile = new File("C:\\Users\\chris\\OneDrive\\Documents\\Valpo Semester 1 Stuff\\CS 250\\Labs\\Java\\Paint\\Text Files\\LoggingOutput.log");
         FileHandler fh;  
         try {  
-            // This block configure the logger with handler and formatter  
+            // This block configures the logger with handler and formatter  
             fh = new FileHandler("C:\\Users\\chris\\OneDrive\\Documents\\Valpo Semester 1 Stuff\\CS 250\\Labs\\Java\\Paint\\Text Files\\LoggingOutput.log");  
             ArtTools.logger.addHandler(fh);
             SimpleFormatter formatter = new SimpleFormatter();  
@@ -103,16 +100,15 @@ public class MyPaint extends Application {
      * @return, CanvasTab
      */
     public static CanvasTabs getCurrentTab(){
-        return (CanvasTabs)MyPaint.tabPane.getSelectionModel().getSelectedItem();
+        return (CanvasTabs)tabPane.getSelectionModel().getSelectedItem();
     }
     
     /**This method removes a tab
      * if a user exits it.
      */
     public static void removeTab(){
-        MyPaint.tabPane.getTabs().remove(MyPaint.getCurrentTab());
+        tabPane.getTabs().remove(MyPaint.getCurrentTab());
     }
     
-    public static TabPane getTP(){return tabPane;}
     public static Stage getStage(){return mainStage;}
 }

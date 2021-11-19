@@ -19,7 +19,7 @@ public class Autosave extends TimerTask{
     private File s; 
     private Label countdown;
     private CanvasTabs tab;
-    final private static String autosaveDirectory = "C:\\Users\\chris\\OneDrive\\Documents\\Valpo Semester 1 Stuff\\CS 250\\Labs\\Java\\Paint\\Test Pics\\";
+    //final private static String autosaveDirectory = "C:\\Users\\chris\\OneDrive\\Documents\\Valpo Semester 1 Stuff\\CS 250\\Labs\\Java\\Paint\\Test Pics\\";
    
     
     public Autosave(){
@@ -44,7 +44,7 @@ public class Autosave extends TimerTask{
         if (time == 0){
             Platform.runLater(() -> {
                 try{
-                    s = new File(autosaveDirectory + "Paint Autosave.png");
+                    s = new File("C:\\Users\\chris\\OneDrive\\Documents\\Valpo Semester 1 Stuff\\CS 250\\Labs\\Java\\Paint\\Test Pics\\Paint Autosave.png");
                     WritableImage autoImage = new WritableImage((int) tab.getCanvas().getWidth(), (int) tab.getCanvas().getHeight());
                     tab.getCanvas().snapshot(null, autoImage);
                     RenderedImage ri = SwingFXUtils.fromFXImage(autoImage, null);

@@ -15,19 +15,16 @@ import javax.imageio.*;
 public class MainLayout{
     private static Menu file, helpMenu, view, edit, rotate, zoom, autosave;
     private static MenuItem open, save, saveAs, exit,
-    rNotes, about, help, zoomIn, zoomOut, undoB, redoB, timeS,
+    rNotes, about, help, zoomIn, zoomOut, undoB, redoB,
     right90, left90, r180, flipV, flipH, reset, create, cut, copy;
     private static CheckMenuItem select, paste, autosaveDisplay;
     private static CheckMenuItem[] timeOptions;
     private static MenuBar menuBar;
-    private static VBox menu, options, mainWindow;
+    private static VBox menu, options;
     private static FileChooser pickFile;
     private static File saveFile;
     private static Image image;
-    private static BorderPane window;
-    private static ScrollPane workspace;
-    private static Label activeTool;
-    private static NextCanvas canvas;
+    
     
     
     
@@ -106,13 +103,8 @@ public class MainLayout{
         new FileChooser.ExtensionFilter("GIF files (*.gif)", "*.gif"),
         new FileChooser.ExtensionFilter("BMP files (*.bmp)", "*.bmp"));
         
-        
-        
-        mainWindow = new VBox();
         options = new VBox();
-        workspace = new ScrollPane();
-        window = new BorderPane();
-        window.setPrefSize(1000, 800);
+
         
         right90.setOnAction(r90 -> {
             CanvasTabs.getPane().setRotate(CanvasTabs.getPane().getRotate() + 90);
@@ -192,15 +184,13 @@ public class MainLayout{
         
         create.setAccelerator(KeyCombination.keyCombination("Ctrl+N"));
         create.setOnAction(c -> {
-            CanvasTabs temp = new CanvasTabs();
-            MyPaint.getTP().getTabs().add(temp);
-            MyPaint.getTP().getSelectionModel().select(temp);
+            newTab();
         });
         
         //File Operations
         open.setAccelerator(KeyCombination.keyCombination("Ctrl+O"));
         open.setOnAction(t -> {//Opening an image
-            Open();
+            open();
         });
         
         //normal save
@@ -308,11 +298,20 @@ public class MainLayout{
         timeOptions[9].setSelected(false);
     }
     
+    /**This method creates a new
+     * blank tab. 
+     */
+    private void newTab(){
+        CanvasTabs temp = new CanvasTabs();
+        MyPaint.tabPane.getTabs().add(temp);
+        MyPaint.tabPane.getSelectionModel().select(temp);
+    }
+    
     
     /**Opens the file chooser so a
      * user can open an image
      */
-    public void Open(){
+    protected void open(){
         CanvasTabs temp;
         File selection = pickFile.showOpenDialog(MyPaint.getStage());
         //opens image from path
@@ -322,24 +321,21 @@ public class MainLayout{
             saveFile = selection;
             temp = new CanvasTabs(selection);
             //sets canvas to size of image
-            temp.getCanvas().setWidth(image.getWidth());
-            temp.getCanvas().setHeight(image.getHeight());
+            CanvasTabs.getCanvas().setWidth(image.getWidth());
+            CanvasTabs.getCanvas().setHeight(image.getHeight());
             //draws image to canvas
-            temp.getCanvas().getGC().drawImage(image, 0, 0);
-            MyPaint.getTP().getTabs().add(temp);
-            MyPaint.getTP().getSelectionModel().select(temp);
+            NextCanvas.getGC().drawImage(image, 0, 0);
+            MyPaint.tabPane.getTabs().add(temp);
+            MyPaint.tabPane.getSelectionModel().select(temp);
         }else{
-            CanvasTabs blankTemp = new CanvasTabs();
-            MyPaint.getTP().getTabs().add(blankTemp);
-            MyPaint.getTP().getSelectionModel().select(blankTemp);
-        }
-        
+            newTab();
+        }    
     }
     
     /**This method calls the normal save method if a file exists
      * and initSaveNAs if there is not an existing save file
      */       
-    public static void save(){
+    protected static void save(){
         //pulls up save as if no file is present
         if (saveFile == null){
             initSaveNAs(pickFile, MyPaint.getStage(), CanvasTabs.getCanvas());
@@ -351,7 +347,7 @@ public class MainLayout{
     /**This method calls the initSaveNAs method
      * to save a new file
      */
-    public static void saveAs(){
+    private static void saveAs(){
         initSaveNAs(pickFile, MyPaint.getStage(), CanvasTabs.getCanvas());
     }
     

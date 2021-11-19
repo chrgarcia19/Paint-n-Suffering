@@ -1,12 +1,10 @@
 package mypaint;
 
 import java.util.*;
-import javafx.scene.*;
 import javafx.scene.canvas.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.input.*;
-import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
 import javafx.scene.text.*;
@@ -28,7 +26,7 @@ public class NextCanvas extends DrawCanvas{
         undo.push(MainLayout.getImage());
         this.setWidth(800);
         this.setHeight(750);
-       
+
         this.getGC().setFill(Color.WHITE);
         this.getGC().setStroke(Color.WHITE);
         ArtTools.getFill().setSelected(true);
@@ -43,33 +41,33 @@ public class NextCanvas extends DrawCanvas{
             x1 = cmp.getX();
             y1 = cmp.getY();
             if (ArtTools.getLine().isSelected()){//line tool
-                addUndo(undo, this);
+                MyPaint.getCurrentTab().getCanvas().addUndo(undo, this);
             }else if (ArtTools.getPencil().isSelected()){//pencil tool
                 this.getGC().beginPath();
                 //tracks initial x and y
                 this.getGC().moveTo(cmp.getX(), cmp.getY());
                 this.getGC().stroke();
-                addUndo(undo, this);
+                MyPaint.getCurrentTab().getCanvas().addUndo(undo, this);
             }else if(ArtTools.getSquare().isSelected()){//square tool
-                addUndo(undo, this);
+                MyPaint.getCurrentTab().getCanvas().addUndo(undo, this);
             }else if(ArtTools.getRectangle().isSelected()){//rectangle tool
-                addUndo(undo, this);
+                MyPaint.getCurrentTab().getCanvas().addUndo(undo, this);
             }else if (ArtTools.getRoundRectangle().isSelected()){//round rectangle tool
-                addUndo(undo, this);
+                MyPaint.getCurrentTab().getCanvas().addUndo(undo, this);
             }else if(ArtTools.getEllipse().isSelected()){//ellipse tool
-                addUndo(undo, this);
+                MyPaint.getCurrentTab().getCanvas().addUndo(undo, this);
             }else if(ArtTools.getCircle().isSelected()){//circle tool
-                addUndo(undo, this);
+                MyPaint.getCurrentTab().getCanvas().addUndo(undo, this);
             }else if(ArtTools.getPolygon().isSelected()){//polygon tool
-                addUndo(undo, this);
+                MyPaint.getCurrentTab().getCanvas().addUndo(undo, this);
             }else if(ArtTools.getEraser().isSelected()){//eraser tool
                 this.getGC().beginPath();
                 //tracks initial x and y
                 this.getGC().moveTo(cmp.getX(), cmp.getY());
                 this.getGC().stroke();
-                addUndo(undo, this);
+                MyPaint.getCurrentTab().getCanvas().addUndo(undo, this);
             }else if(MainLayout.getSelect().isSelected()){//select
-                addUndo(undo, this);
+                MyPaint.getCurrentTab().getCanvas().addUndo(undo, this);
             }
         });    
         this.setOnMouseDragged((MouseEvent cmd) -> {
@@ -127,43 +125,43 @@ public class NextCanvas extends DrawCanvas{
             if(ArtTools.getLine().isSelected()){//line tool
                 //makes line using 4 points
                 this.getGC().strokeLine(x1, y1, x2, y2);
-                CanvasTabs.setChanges(true);
+                MyPaint.getCurrentTab().setChanges(true);
                 redo.clear();
             }else if(ArtTools.getPencil().isSelected()){//pencil tool
-                CanvasTabs.setChanges(true);
+                MyPaint.getCurrentTab().setChanges(true);
                 redo.clear();
             }else if(ArtTools.getSquare().isSelected()){//square tool
                 DrawCanvas.drawSquare(x1, y1, x2, y2);
-                CanvasTabs.setChanges(true);
+                MyPaint.getCurrentTab().setChanges(true);
                 redo.clear();
             }else if(ArtTools.getRectangle().isSelected()){//rectangle tool  
                 DrawCanvas.drawRectangle(x1, y1, x2, y2);
-                CanvasTabs.setChanges(true);
+                MyPaint.getCurrentTab().setChanges(true);
                 redo.clear();
             }else if(ArtTools.getRoundRectangle().isSelected()){//round rectangle tool  
                 DrawCanvas.drawRoundRectangle(x1, y1, x2, y2);
-                CanvasTabs.setChanges(true);
+                MyPaint.getCurrentTab().setChanges(true);
                 redo.clear();
             }else if(ArtTools.getEllipse().isSelected()){//ellipse tool
                 DrawCanvas.drawEllipse(x1, y1, x2, y2);
-                CanvasTabs.setChanges(true);
+                MyPaint.getCurrentTab().setChanges(true);
                 redo.clear();
             }else if(ArtTools.getCircle().isSelected()){//circle tool
                 DrawCanvas.drawCircle(x1, y1, x2, y2);
-                CanvasTabs.setChanges(true);
+                MyPaint.getCurrentTab().setChanges(true);
                 redo.clear();
             }else if(ArtTools.getPolygon().isSelected()){//polygon tool
                 DrawCanvas.drawPolygon(x1, y1, x2, y2);
-                CanvasTabs.setChanges(true);
+                MyPaint.getCurrentTab().setChanges(true);
                 redo.clear();
             }else if(ArtTools.getEraser().isSelected()){//eraser tool
-                CanvasTabs.setChanges(true);
+                MyPaint.getCurrentTab().setChanges(true);
                 redo.clear();
             }else if(MainLayout.getSelect().isSelected()){//select
                 Image show = (Image) undo.peek();
                 this.getGC().drawImage(show, 0, 0);
                 DrawCanvas.drawSelection(x1, y1, x2, y2);
-                CanvasTabs.setChanges(true);
+                MyPaint.getCurrentTab().setChanges(true);
                 redo.clear();
                 MainLayout.getCut().setDisable(false);
                 MainLayout.getCopy().setDisable(false);
@@ -172,10 +170,10 @@ public class NextCanvas extends DrawCanvas{
         this.setOnMouseClicked((MouseEvent cmc) -> { 
             if(ArtTools.getText().isSelected()){//text tool
                 initDraw(this.getGC(), ArtTools.getFontSize(), ArtTools.getOutline());
-                addUndo(undo, this);
+                MyPaint.getCurrentTab().getCanvas().addUndo(undo, this);
                 String input = ArtTools.getType().getText();
                 this.getGC().fillText(input, cmc.getX(), cmc.getY());
-                CanvasTabs.setChanges(true);
+                MyPaint.getCurrentTab().setChanges(true);
                 redo.clear();
             }else if(ArtTools.getColorGrabber().isSelected()){//color grabber
                 WritableImage wI = new WritableImage((int) this.getWidth(),(int) this.getHeight());
@@ -183,10 +181,10 @@ public class NextCanvas extends DrawCanvas{
                 PixelReader pr = wI.getPixelReader();
                 ArtTools.getFillColor().setValue(pr.getColor((int) cmc.getX(), (int)cmc.getY()));
                 ArtTools.getOutline().setValue(pr.getColor((int) cmc.getX(), (int)cmc.getY()));
-                CanvasTabs.setChanges(true);
+                MyPaint.getCurrentTab().setChanges(true);
             }else if(MainLayout.getPaste().isSelected()){//paste
                 this.getGC().drawImage(DrawCanvas.getImage(), cmc.getX(), cmc.getY());
-                CanvasTabs.setChanges(true);
+                MyPaint.getCurrentTab().setChanges(true);
                 redo.clear();
             }
         });
@@ -229,6 +227,12 @@ public class NextCanvas extends DrawCanvas{
         }
     }
     
+    /**This method sets the text size and color  
+     * for the text tool.
+     * @param gc, graphics context object
+     * @param cb, integer combo box
+     * @param o, outline color picker
+     */
     public static void initDraw(GraphicsContext gc, ComboBox<Integer> cb, ColorPicker o){
         gc.setStroke(o.getValue());
         if (Integer.parseInt(cb.getEditor().getText()) <= 0){
@@ -314,15 +318,17 @@ public class NextCanvas extends DrawCanvas{
      * @param s, a Stack of images
      * @param c, a this object
      */
-    public void addUndo(Stack<Image> s, NextCanvas c){
+    public void addUndo(Stack<Image> s, Canvas c){
         Image prev = new WritableImage((int) c.getWidth(),(int) c.getHeight());
         this.snapshot(null, (WritableImage) prev);
         s.push(prev);
         redo.clear();
     }  
     
+    
     public static double getX1(){return x1;}
     public static double getY1(){return y1;}
     public static double getX2(){return x2;}
     public static double getY2(){return y2;}
+    public static double getZoom(){return zoom;}
 }

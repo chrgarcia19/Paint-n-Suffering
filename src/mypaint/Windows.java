@@ -6,10 +6,12 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.*;
-import javafx.event.Event;
+import javafx.event.*;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -22,7 +24,7 @@ public class Windows {
      * @param primaryStage, to allow for new window to open
      */
     public static void exitPaint(Stage primaryStage){
-        ButtonType[] exit = new ButtonType[] {new ButtonType("Yes"), new ButtonType("Save"), new ButtonType("No")};
+        ButtonType[] exit = new ButtonType[] {new ButtonType("Yes"), new ButtonType("Save+Exit"), new ButtonType("No")};
         Alert exitPaint = new Alert(Alert.AlertType.CONFIRMATION, "Exit Paint n' Suffering?", exit[0],
                 exit[1], exit[2]);
         exitPaint.setTitle("Exit Paint n' Suffering?");
@@ -78,42 +80,62 @@ public class Windows {
         Label prompt;
         Button button1 = new Button(), button2 = new Button(), 
                 button3 = new Button();
-        File text = new File("C:\\Users\\chris\\OneDrive\\Documents\\Valpo Semester 1 Stuff\\CS 250\\Labs\\Java\\Paint\\Text Files\\Paint Help.txt");
+        File text = new File("");
         HBox holdButton, holdLabel;
         VBox contents = new VBox();
         ScrollPane pane = new ScrollPane();
         String[] info = windowInfo(type);
         if (type == "Exit"){
             window.setTitle(info[0]);
-            window.setHeight(100);
-            window.setWidth(340);
+            window.setHeight(103);
+            window.setWidth(337);
             prompt = new Label(info[1]);
             button1.setText(info[3]);
             button2.setText(info[4]);
             button3.setText(info[2]);
             holdLabel = new HBox(prompt);
-            if (CanvasTabs.getChanges()){
-                button1.setPrefWidth(165);
-                button2.setPrefWidth(165);
-                button3.setPrefWidth(165);
-                holdButton = new HBox(button1, button2, button3);
-            }else{ //if no changes are made
-                button1.setPrefWidth(247.5);
-                button3.setPrefWidth(247.5);
-                holdButton = new HBox(button1, button3);
-            }
+            button1.setPrefWidth(105);
+            button2.setPrefWidth(105);
+            button3.setPrefWidth(105);
+            holdButton = new HBox(button1, button2, button3);
             contents.getChildren().addAll(holdLabel, holdButton);
             window.setScene(new Scene(contents));
         }else if (type == "Help" || type == "Release Notes" || type == "About"){
             window.setTitle(info[0]);
-            window.setWidth(342);
-            if (type != "About"){
-                window.setHeight(575);
-            }else{
+            if (type == "About"){
+                window.setWidth(321);
                 window.setHeight(467);
+                button1.setPrefWidth(300);
+            }else if (type == "Release Notes"){
+                window.setWidth(326);
+                window.setHeight(575);
+                button1.setPrefWidth(287);
+                final Clipboard cb = Clipboard.getSystemClipboard();
+                final ClipboardContent content = new ClipboardContent();
+                Label github = new Label("Github: ");
+                Label videoLabel = new Label("Features Video: ");
+                Hyperlink git = new Hyperlink();
+                Hyperlink video = new Hyperlink();
+                git.setText("https://github.com/C-Garcia19/\nPaint-n-Suffering");
+                video.setText("https://youtu.be/iCJew1f_1gs");
+                contents.getChildren().addAll(github, git, videoLabel, video);
+                git.setOnMouseClicked(gmc -> {
+                    System.out.println("Github link copied!");
+                    content.putString(git.getText());
+                    cb.setContent(content);
+                });
+                video.setOnMouseClicked(vmc -> {
+                    System.out.println("Video link copied!");
+                    content.putString(video.getText());
+                    cb.setContent(content);
+                }); 
+            }else if (type == "Help"){
+                window.setWidth(337);
+                window.setHeight(575);
+                button1.setPrefWidth(299);
             }
+            
             button1.setText(info[2]);
-            button1.setPrefWidth(305);
             if (type == "Help"){
                 text = new File("C:\\Users\\chris\\OneDrive\\Documents\\Valpo Semester 1 Stuff\\CS 250\\Labs\\Java\\Paint\\Text Files\\Paint Help.txt");
             }else if (type == "Release Notes"){
@@ -121,11 +143,10 @@ public class Windows {
             }else if (type == "About"){
                 text = new File("C:\\Users\\chris\\OneDrive\\Documents\\Valpo Semester 1 Stuff\\CS 250\\Labs\\Java\\Paint\\Text Files\\Paint About.txt");
             }
-            
+            readText(text, contents);
+            contents.getChildren().addAll(split, button1); 
         }
-        readText(text, contents);
         pane.setContent(contents);
-        contents.getChildren().addAll(split, button1);      
         window.setScene(new Scene(pane));
         window.show();
         button1.setOnAction(b1 -> {
@@ -158,10 +179,10 @@ public class Windows {
             "Button 2", "Button 3"}; 
         if (type == "Exit"){
             info[0] = "Close Program";
-            info[1] = "  Do you wish to exit?";
+            info[1] = "                    Do you wish to exit?";
             info[2] = "Exit";
             info[3] = "Cancel";
-            info[4] = "Save and Exit";
+            info[4] = "Save+Exit";
         }else if (type == "Help"){
             info[0] = "Help";
             info[2] = "Return to Program";
