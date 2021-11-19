@@ -1,5 +1,8 @@
 package mypaint;
 
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javafx.stage.Stage;
 import org.junit.*;
 
 public class UnitTest {
@@ -11,17 +14,17 @@ public class UnitTest {
     public void widthTest(){
         NextCanvas canvas = new NextCanvas();
         double width = 800; //Width when canvas is created
-        Assert.assertEquals(width, canvas.getCanvas().getWidth(), 0);
+        Assert.assertEquals(width, canvas.getWidth(), 0);
     }
     
     /**This method tests the initial Boolean value of
      * the variable changes made
      */
     @Test
-    public void changesTest(){
-        CanvasTabs canvas = new CanvasTabs();
-        Boolean changes = false; //set to false when initialized.
-        Assert.assertEquals(changes, canvas.getChanges().booleanValue());
+    public void zoomTest(){
+        NextCanvas canvas = new NextCanvas();
+        double actualZoom = 1; //set to false when initialized.
+        Assert.assertEquals(actualZoom, canvas.getZoom(), 0);
     }
     
     /**This method test the initial value of x1 
@@ -32,6 +35,35 @@ public class UnitTest {
         NextCanvas tool = new NextCanvas();
         double x1 = 0; //x1 is 0 because it is not initialized
         Assert.assertEquals(x1, tool.getX1(), 0);
+    }
+    
+    /**This method tests if the program works properly
+     * and allows for the other tests to work properly.
+     * @throws InterruptedException 
+     */
+    @Test
+    public void testPaint() throws InterruptedException{
+        Thread t = new Thread(new Runnable() {
+            
+            @Override
+            public void run(){
+                //initializes JavaFX
+                new JFXPanel();
+                Platform.runLater(new Runnable() {
+                    
+                    @Override
+                    public void run(){
+                        try{
+                            new MyPaint().start(new Stage());
+                        }catch (Exception e){
+                            System.out.println("The program broke!");
+                        }
+                    }
+                });
+            }
+        });
+        t.start();
+        t.sleep(10000);
     }
     
 }
